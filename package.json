@@ -1,0 +1,20 @@
+{
+  "name": "tw-overlay-data",
+  "version": "1.0.0",
+  "description": "TalesWeaver Eta Ranking Scraper & Data DB",
+  "main": "scraper.js",
+  "scripts": {
+    "start": "node scraper.js"
+  },
+  "keywords": [
+    "talesweaver",
+    "scraper",
+    "ranking"
+  ],
+  "author": "tw-overlay",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "puppeteer": "^22.6.0"
+  }
+}
