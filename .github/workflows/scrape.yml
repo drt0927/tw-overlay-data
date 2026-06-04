@@ -13,10 +13,13 @@ permissions:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -49,5 +52,5 @@ jobs:
             echo "No changes in eta_ranking.json. Skipping push."
           else
             git commit -m "chore: update daily eta rankings ($(date +'%Y-%m-%d'))"
-            git push origin feature/chat-overlay # 현재 기능 브랜치에 푸시하되, 나중에 main으로 병합되면 알아서 작동하도록 push 대상 설정
+            git push origin main
           fi
