@@ -147,6 +147,14 @@ async function run() {
     await delay(1000); // 서버 전환 간 1초 대기
     const haiacan = await scrapeServer(browser, 7);  // 하이아칸
     
+    // 수집된 데이터 검증
+    if (!neyaffle.entries || neyaffle.entries.length === 0) {
+      throw new Error("네냐플 서버에서 수집된 에타 랭킹 데이터가 없습니다.");
+    }
+    if (!haiacan.entries || haiacan.entries.length === 0) {
+      throw new Error("하이아칸 서버에서 수집된 에타 랭킹 데이터가 없습니다.");
+    }
+
     const allRankings = [...neyaffle.entries, ...haiacan.entries];
     
     // 최종 업데이트 날짜 조율

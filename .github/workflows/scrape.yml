@@ -39,6 +39,21 @@ jobs:
       - name: Run Scraper
         run: npm start
 
+      - name: Validate Scraped Data
+        run: |
+          if [ ! -f eta_ranking.json ]; then
+            echo "Error: eta_ranking.json file does not exist."
+            exit 1
+          fi
+          node -e "
+            const data = require('./eta_ranking.json');
+            if (!data.Rankings || !Array.isArray(data.Rankings) || data.Rankings.length === 0) {
+              console.error('Error: Rankings data is empty or invalid.');
+              process.exit(1);
+            }
+            console.log('Validation passed. Total rankings:', data.Rankings.length);
+          "
+
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions[bot]"
